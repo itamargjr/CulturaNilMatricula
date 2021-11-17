@@ -9,6 +9,8 @@ public class Cult_segmento {
 	private String dia_segmento;	
 	private String turno_segmento;	
 	private Integer vagas_segmento;
+	
+	private Integer idadebusca;
 
 	public Cult_segmento(Integer id_segmento, Integer ano_segmento, String descricao_segmento,
 			Integer idademin_segmento, Integer idademax_segmento, String dia_segmento, String turno_segmento,
@@ -26,6 +28,14 @@ public class Cult_segmento {
 
 	public Cult_segmento() {
 		super();
+	}
+
+	public Integer getIdadebusca() {
+		return idadebusca;
+	}
+
+	public void setIdadebusca(Integer idadebusca) {
+		this.idadebusca = idadebusca;
 	}
 
 	public Integer getAno_segmento() {
@@ -97,7 +107,7 @@ public class Cult_segmento {
 		return "Cult_segmento [id_segmento=" + id_segmento + ", ano_segmento=" + ano_segmento + ", descricao_segmento="
 				+ descricao_segmento + ", idademin_segmento=" + idademin_segmento + ", idademax_segmento="
 				+ idademax_segmento + ", dia_segmento=" + dia_segmento + ", turno_segmento=" + turno_segmento
-				+ ", vagas_segmento=" + vagas_segmento + "]";
+				+ ", vagas_segmento=" + vagas_segmento + ", idadebusca=" + idadebusca + "]";
 	}
 
 }
