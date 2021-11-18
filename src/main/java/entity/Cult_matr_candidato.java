@@ -67,6 +67,8 @@ public class Cult_matr_candidato {
 	private String descricao_segmento5;
 	private String dia_segmento5;	
 	private String turno_segmento5;
+	
+	private String cpf_candidato;
 
 	public Cult_matr_candidato() {
 		super();
@@ -86,7 +88,7 @@ public class Cult_matr_candidato {
 			String turno_segmento1, String descricao_segmento2, String dia_segmento2, String turno_segmento2,
 			String descricao_segmento3, String dia_segmento3, String turno_segmento3, String descricao_segmento4,
 			String dia_segmento4, String turno_segmento4, String descricao_segmento5, String dia_segmento5,
-			String turno_segmento5) {
+			String turno_segmento5, String cpf_candidato) {
 		super();
 		this.id_candidato = id_candidato;
 		this.id_responsavel = id_responsavel;
@@ -143,6 +145,15 @@ public class Cult_matr_candidato {
 		this.descricao_segmento5 = descricao_segmento5;
 		this.dia_segmento5 = dia_segmento5;
 		this.turno_segmento5 = turno_segmento5;
+		this.cpf_candidato = cpf_candidato;
+	}
+
+	public String getCpf_candidato() {
+		return cpf_candidato;
+	}
+
+	public void setCpf_candidato(String cpf_candidato) {
+		this.cpf_candidato = cpf_candidato;
 	}
 
 	public String getDescricao_cid10() {
@@ -593,16 +604,24 @@ public class Cult_matr_candidato {
 				+ estciv_candidato + ", sexo_candidato=" + sexo_candidato + ", nacionalidade_candidato="
 				+ nacionalidade_candidato + ", email_candidato=" + email_candidato + ", celular_candidato="
 				+ celular_candidato + ", fixo_candidato=" + fixo_candidato + ", bairro_candidato=" + bairro_candidato
-				+ ", ano_candidato=" + ano_candidato + ", tipo_candidato=" + tipo_candidato + ", necespec_candidato="
-				+ necespec_candidato + ", cid_candidato=" + cid_candidato + ", id_segmento1=" + id_segmento1
-				+ ", id_segmento2=" + id_segmento2 + ", id_segmento3=" + id_segmento3 + ", id_segmento4=" + id_segmento4
-				+ ", id_segmento5=" + id_segmento5 + ", id_segmento=" + id_segmento + ", descricao_segmento1="
-				+ descricao_segmento1 + ", dia_segmento1=" + dia_segmento1 + ", turno_segmento1=" + turno_segmento1
-				+ ", descricao_segmento2=" + descricao_segmento2 + ", dia_segmento2=" + dia_segmento2
-				+ ", turno_segmento2=" + turno_segmento2 + ", descricao_segmento3=" + descricao_segmento3
-				+ ", dia_segmento3=" + dia_segmento3 + ", turno_segmento3=" + turno_segmento3 + ", descricao_segmento4="
-				+ descricao_segmento4 + ", dia_segmento4=" + dia_segmento4 + ", turno_segmento4=" + turno_segmento4
-				+ ", descricao_segmento5=" + descricao_segmento5 + ", dia_segmento5=" + dia_segmento5
-				+ ", turno_segmento5=" + turno_segmento5 + "]";
+				+ ", ano_candidato=" + ano_candidato + ", nome_responsavel=" + nome_responsavel + ", tipo_responsavel="
+				+ tipo_responsavel + ", cpf_responsavel=" + cpf_responsavel + ", email_responsavel=" + email_responsavel
+				+ ", celular_responsavel=" + celular_responsavel + ", identidade_responsavel=" + identidade_responsavel
+				+ ", emissoridt_responsavel=" + emissoridt_responsavel + ", tipo_endereco=" + tipo_endereco
+				+ ", identidade_endereco=" + identidade_endereco + ", cep_endereco=" + cep_endereco + ", uf_endereco="
+				+ uf_endereco + ", logradouro_endereco=" + logradouro_endereco + ", numero_endereco=" + numero_endereco
+				+ ", complemento_endereco=" + complemento_endereco + ", codigo_municipio=" + codigo_municipio
+				+ ", bairro_endereco=" + bairro_endereco + ", tipo_candidato=" + tipo_candidato
+				+ ", necespec_candidato=" + necespec_candidato + ", cid_candidato=" + cid_candidato
+				+ ", descricao_cid10=" + descricao_cid10 + ", id_segmento1=" + id_segmento1 + ", id_segmento2="
+				+ id_segmento2 + ", id_segmento3=" + id_segmento3 + ", id_segmento4=" + id_segmento4 + ", id_segmento5="
+				+ id_segmento5 + ", id_segmento=" + id_segmento + ", descricao_segmento1=" + descricao_segmento1
+				+ ", dia_segmento1=" + dia_segmento1 + ", turno_segmento1=" + turno_segmento1 + ", descricao_segmento2="
+				+ descricao_segmento2 + ", dia_segmento2=" + dia_segmento2 + ", turno_segmento2=" + turno_segmento2
+				+ ", descricao_segmento3=" + descricao_segmento3 + ", dia_segmento3=" + dia_segmento3
+				+ ", turno_segmento3=" + turno_segmento3 + ", descricao_segmento4=" + descricao_segmento4
+				+ ", dia_segmento4=" + dia_segmento4 + ", turno_segmento4=" + turno_segmento4 + ", descricao_segmento5="
+				+ descricao_segmento5 + ", dia_segmento5=" + dia_segmento5 + ", turno_segmento5=" + turno_segmento5
+				+ ", cpf_candidato=" + cpf_candidato + "]";
 	}
 }

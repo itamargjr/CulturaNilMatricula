@@ -181,7 +181,7 @@ public class SendMail {
         MimeBodyPart attachFilePart = new MimeBodyPart();
         MimeBodyPart messageBodyPart = new MimeBodyPart();
         Multipart mp = new MimeMultipart();  
-        String nomeArquivo= "candidato.pdf"; // nome do arquivo em anexo  
+        String nomeArquivo= "candidatoCultura.pdf"; // nome do arquivo em anexo  
         
         try {  
         	

@@ -16,9 +16,8 @@ public class Cult_matr_candidatoDao extends Dao {
 		String statement = "select id_candidato " +
                 "from cult_matr_candidato " +
                 "where " +
-                "  upper(nome_candidato) = upper('" + cand.getNome_candidato()   + "') and " +
-                "  nascimento_candidato  = '" + cand.getNascimento_candidato()   + "'  and " +
-                "  upper(email_candidato) = upper('" + cand.getEmail_candidato() + "')";
+                "  ano_candidato = " + cand.getAno_candidato() + " and " +
+                "  cpf_candidato = '" + cand.getCpf_candidato() + "'";
 		
 		stmt = con.prepareStatement(statement);
 		
@@ -56,8 +55,8 @@ public class Cult_matr_candidatoDao extends Dao {
 	                  "estciv_candidato, sexo_candidato, nacionalidade_candidato, email_candidato, " +
 	                  "celular_candidato, fixo_candidato, bairro_candidato, " + 
 	                  "id_segmento1, id_segmento2, id_segmento3, id_segmento4, id_segmento5, " +
-	                  "id_segmento, ano_candidato, id_candidato, tipo_candidato, necespec_candidato, cid_candidato) " +
-		              "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	
+	                  "id_segmento, ano_candidato, id_candidato, tipo_candidato, necespec_candidato, cid_candidato, cpf_candidato) " +
+		              "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	
 	
 		
 	
@@ -122,6 +121,7 @@ public class Cult_matr_candidatoDao extends Dao {
 		stmt.setString(21, cand.getTipo_candidato());
 		stmt.setString(22, cand.getNecespec_candidato());
 		stmt.setString(23, cand.getCid_candidato());
+		stmt.setString(24, cand.getCpf_candidato());
 
 		Integer linhasafetadas = stmt.executeUpdate();
 		
@@ -139,7 +139,7 @@ public class Cult_matr_candidatoDao extends Dao {
 		
 		String statement = "select " + 
 						   "a.id_responsavel, a.nome_candidato, a.mae_candidato, " +
-						   "a.pai_candidato, a.nascimento_candidato,  " +
+						   "a.pai_candidato, a.nascimento_candidato, a.cpf_candidato, " +
 						   "a.estciv_candidato, a.sexo_candidato, a.nacionalidade_candidato, a.email_candidato, " +
 						   "a.celular_candidato, a.fixo_candidato, a.bairro_candidato, " + 
 						   "a.id_segmento1, a.id_segmento2, a.id_segmento3, a.id_segmento4, a.id_segmento5, " +
@@ -166,9 +166,7 @@ public class Cult_matr_candidatoDao extends Dao {
 						   "    left outer join cid10 i on (a.cid_candidato = i.codigo_cid10),  " +
 						   "  edu_matr_responsavel g, end_endereco h " +
 						   "where " +
-						   "  a.nascimento_candidato = '" + cand.getNascimento_candidato() + "' and " +
-						   "  a.nome_candidato = '" + cand.getNome_candidato() + "' and " +
-						   "  a.email_candidato = '" + cand.getEmail_candidato() + "' and " +
+						   "  a.cpf_candidato = '" + cand.getCpf_candidato() + "' and " +
 						   "  a.ano_candidato = '" + cand.getAno_candidato() + "' and " +
 						   "  a.id_responsavel = g.id_responsavel AND " +
 						   "  a.id_candidato = h.identidade_endereco AND " +
@@ -295,7 +293,8 @@ public class Cult_matr_candidatoDao extends Dao {
 					rs.getString("dia_segmento4"), turno4,
 					
 					rs.getString("descricao_segmento5"),
-					rs.getString("dia_segmento5"), turno5);
+					rs.getString("dia_segmento5"), turno5,
+					rs.getString("cpf_candidato"));
 
 		}						  
 		
@@ -313,7 +312,7 @@ public class Cult_matr_candidatoDao extends Dao {
 		
 		String statement = "select " + 
 						   "a.id_responsavel, a.nome_candidato, a.mae_candidato, " +
-						   "a.pai_candidato, a.nascimento_candidato,  " +
+						   "a.pai_candidato, a.nascimento_candidato, a.cpf_candidato, " +
 						   "a.estciv_candidato, a.sexo_candidato, a.nacionalidade_candidato, a.email_candidato, " +
 						   "a.celular_candidato, a.fixo_candidato, a.bairro_candidato, " + 
 						   "a.id_segmento1, a.id_segmento2, a.id_segmento3, a.id_segmento4, a.id_segmento5, " +
@@ -347,7 +346,7 @@ public class Cult_matr_candidatoDao extends Dao {
 		
 		stmt = con.prepareStatement(statement);
 		
-		//System.out.println(statement);
+		System.out.println(statement);
 		
 		rs = stmt.executeQuery();
 		
@@ -466,7 +465,8 @@ public class Cult_matr_candidatoDao extends Dao {
 					rs.getString("dia_segmento4"), turno4,
 					
 					rs.getString("descricao_segmento5"),
-					rs.getString("dia_segmento5"), turno5);
+					rs.getString("dia_segmento5"), turno5,
+					rs.getString("cpf_candidato"));
 			
 			lista.add(c);
 

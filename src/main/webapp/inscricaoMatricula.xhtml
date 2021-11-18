@@ -37,6 +37,10 @@
 					</div>
 					<div class="ObjetosLinha">
 						<div class="ObjetosColuna">
+      						<p:outputLabel value="CPF"/>
+      						<p:inputText onfocus="Cpf(this)" value="#{cult_matr_candidatoBean.candidato.cpf_candidato}" styleClass="TamanhoM" required="true" requiredMessage="por favor informe o CPF"/>
+      					</div>
+						<div class="ObjetosColuna">
 							<p:outputLabel value="Bairro Candidato" />
 							<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.bairro_candidato}" styleClass="TamanhoSelectMIN" required="true" requiredMessage="por favor informe o bairro que o candidato reside">
 								<f:selectItem itemValue="" itemLabel="" />
@@ -194,11 +198,8 @@
 	      					<p:selectBooleanCheckbox value="#{cult_matr_candidatoBean.necespec}" itemLabel="Candidato é portador de necessidades especiais?" />
 	      				</div>
       					<div class="ObjetosColuna">
-							<p:outputLabel value="Tipo" />
-							<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.cid_candidato}" styleClass="TamanhoSelectM">
-								<f:selectItem itemValue="" itemLabel="" />
-								<f:selectItems value="#{cid10Bean.cid10lista}"  var="cid" itemValue="#{cid.codigo_cid10}" itemLabel="#{cid.descricao_cid10}"/>							
-							</p:selectOneMenu>
+							<p:outputLabel value="CID" />
+							<p:inputText value="#{cult_matr_candidatoBean.candidato.cid_candidato}" styleClass="TamanhoM"/>							
 						</div> 
       				</div>
 	      		</p:panel>
