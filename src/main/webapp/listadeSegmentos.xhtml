@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+<ui:composition template="#{paginasBean._template}">  
+    <ui:define name="corpo">
+    
+    	<p:messages />  	
+			
+		<p:panel header="Preencha os dados abaixo para filtrar sua consulta">
+		
+			<h:form id="formpesquisa">
+				<div class="ObjetosLinha">
+					<div class="ObjetosColuna">
+						<p:outputLabel value="ano" />
+						<p:inputText value="#{cult_segmentoBean.segmento.ano_segmento}" styleClass="TamanhoM" required="true" requiredMessage="por favor informe o ano"/>
+					</div>
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Segmento" />
+						<p:selectOneMenu value="#{cult_segmentoBean.segmento.descricao_segmento}" styleClass="TamanhoSelectMIN">
+							<f:selectItem itemValue="" itemLabel="" />
+							<f:selectItems value="#{cult_segmentoBean.descricaosegmentolista}"  var="descricao"/>								
+						</p:selectOneMenu>
+					</div>
+					<div class="ObjetosColuna">
+						<p:outputLabel value="Dias" />
+						<p:selectOneMenu value="#{cult_segmentoBean.segmento.dia_segmento}" styleClass="TamanhoSelectMIN">
+							<f:selectItem itemValue="" itemLabel="" />
+							<f:selectItems value="#{cult_segmentoBean.diassegmentolista}"  var="dia"/>								
+						</p:selectOneMenu>
+					</div>
+				</div>
+      			
+      			<br/>
+         			
+		     	<p:commandButton styleClass="BotaoPrimario" action="#{cult_segmentoBean.buscar()}" value="Buscar" ajax="false" update=":formcadastro"/>
+      			 			
+			</h:form>
+		</p:panel>
+		
+    	<h:form id="formcadastro" rendered="#{not empty cult_segmentoBean.segmentolista}">
+    		<p:dataTable id="tabelavagas" var="segmento" value="#{cult_segmentoBean.segmentolista}"  style="margin-bottom:0">
+		        <f:facet name="header">
+		            Secretaria de Cultura
+		        </f:facet>
+		        <p:column headerText="Id">
+		            <h:outputText value="#{segmento.id_segmento}" />
+		        </p:column>
+		        <p:column headerText="Segmento">
+		            <h:outputText value="#{segmento.descricao_segmento}" />
+		        </p:column>
+		        <p:column headerText="Idade" rendered="#{segmento.idademax_segmento ne 200}">
+		            <h:outputText value="de #{segmento.idademin_segmento} a #{segmento.idademax_segmento} anos" />
+		        </p:column>
+		        <p:column headerText="Idade" rendered="#{segmento.idademax_segmento eq 200}">
+		            <h:outputText value="a partir de #{segmento.idademin_segmento} anos" />
+		        </p:column>
+		        <p:column headerText="Dias">
+		            <h:outputText value="#{segmento.dia_segmento}" />
+		        </p:column>
+		        <p:column headerText="Turno">		     
+		            <h:outputText value="#{segmento.turno_segmento}" />
+		        </p:column>
+		        <p:column headerText="Vagas">
+		            <h:outputText value="#{segmento.vagas_segmento}" />
+		        </p:column>
+		    </p:dataTable>	
+    		
+      	</h:form>
+   	  		
+
+    </ui:define>
+  </ui:composition>   
+</html>
+
+

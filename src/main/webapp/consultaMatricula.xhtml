@@ -43,7 +43,7 @@
 			</h:form>
 		</p:panel>
 		
-    	<h:form id="formcadastro">
+    	<h:form id="formcadastro" rendered="#{cult_matr_candidatoBean.candidato.id_candidato ne null}">
    	  		<p:tabView>
 		        <p:tab title="Dados Pessoais">
 		            <div class="ObjetosLinha">

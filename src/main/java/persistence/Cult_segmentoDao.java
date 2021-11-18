@@ -35,7 +35,11 @@ public class Cult_segmentoDao extends Dao {
 			statement = statement + " and turno_segmento = '" + segmento.getTurno_segmento() + "'";
 		}
 		
-		stmt = con.prepareStatement(statement);
+		if ((segmento.getDescricao_segmento()!=null)&&(!segmento.getDescricao_segmento().equalsIgnoreCase(""))) {
+			statement = statement + " and descricao_segmento = '" + segmento.getDescricao_segmento() + "'";
+		}
+		
+		stmt = con.prepareStatement(statement + " order by descricao_segmento, idademin_segmento, dia_segmento");
 		
 		rs = stmt.executeQuery();
 		
@@ -50,6 +54,46 @@ public class Cult_segmentoDao extends Dao {
 		
 		return lista;
 		
+	}
+	
+	public List<String> retornaDescricaoSegmento(Integer ano) throws Exception{
+		List<String> lista = new ArrayList<String>();
+		
+		open();
+		
+		String statement = "select distinct descricao_segmento as descricao_segmento from cult_segmento where ano_segmento = " + ano;
+		
+		stmt = con.prepareStatement(statement);
+		
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			lista.add(rs.getString("descricao_segmento"));
+		}
+		
+		close();
+		
+		return lista;
+	}
+	
+	public List<String> retornaDiasSegmento(Integer ano) throws Exception{
+		List<String> lista = new ArrayList<String>();
+		
+		open();
+		
+		String statement = "select distinct dia_segmento as dia_segmento from cult_segmento where ano_segmento = " + ano;
+		
+		stmt = con.prepareStatement(statement);
+		
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			lista.add(rs.getString("dia_segmento"));
+		}
+		
+		close();
+		
+		return lista;
 	}
 
 }

@@ -2,15 +2,13 @@ package manager;
 
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import entity.Edu_matr_candidato;
+import entity.Cult_matr_candidato;
 import persistence.Dao;
-import persistence.Edu_matr_candidatoDao;
 
 /**
  * Bean de controle de acesso.
@@ -30,7 +28,7 @@ public class AcessoBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -8268179366139876532L;
 
-	public Edu_matr_candidato candidato; 
+	public Cult_matr_candidato candidato; 
 	
 	/* Função que mostra em qual banco a aplicação está conectada e retorna a String */
 	public String banco(){
@@ -56,14 +54,14 @@ public class AcessoBean implements Serializable {
 	}
 	
 	public AcessoBean() {
-		candidato = new Edu_matr_candidato();
+		candidato = new Cult_matr_candidato();
 	}
 	
-	public Edu_matr_candidato getCandidato() {
+	public Cult_matr_candidato getCandidato() {
 		return candidato;
 	}
 
-	public void setCandidato(Edu_matr_candidato candidato) {
+	public void setCandidato(Cult_matr_candidato candidato) {
 		this.candidato = candidato;
 	}
 
@@ -77,46 +75,46 @@ public class AcessoBean implements Serializable {
 
 	public String login(){
 		
-		Edu_matr_candidatoDao cd = new Edu_matr_candidatoDao();
-		
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		
-		try {
-			Edu_matr_candidato candidatologado = cd.login(candidato);
-			
-			if (candidatologado.getNome_candidato()==null) {						
-				FacesMessage msg = new FacesMessage("Candidato não encontrado", "Candidato inexistente, ou dados inválidos!");
-				
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				
-				session.setAttribute("idusulogado", 0);
-				
-				return null;
-			}else {
-				
-				candidato = new Edu_matr_candidato();
-				
-				FacesMessage msg = new FacesMessage("Bem vindo", candidatologado.getNome_candidato());
-				
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-							
-				session.setAttribute("nomecandidatologado", candidatologado.getNome_candidato());
-				session.setAttribute("idcandidatologado", candidatologado.getId_candidato());
-				
+//		Cult_matr_candidatoDao cd = new Cult_matr_candidatoDao();
+//		
+//		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+//		
+//		try {
+//			Cult_matr_candidato candidatologado = cd.login(candidato);
+//			
+//			if (candidatologado.getNome_candidato()==null) {						
+//				FacesMessage msg = new FacesMessage("Candidato não encontrado", "Candidato inexistente, ou dados inválidos!");
+//				
+//				FacesContext.getCurrentInstance().addMessage(null, msg);
+//				
+//				session.setAttribute("idusulogado", 0);
+//				
+//				return null;
+//			}else {
+//				
+//				candidato = new Cult_matr_candidato();
+//				
+//				FacesMessage msg = new FacesMessage("Bem vindo", candidatologado.getNome_candidato());
+//				
+//				FacesContext.getCurrentInstance().addMessage(null, msg);
+//							
+//				session.setAttribute("nomecandidatologado", candidatologado.getNome_candidato());
+//				session.setAttribute("idcandidatologado", candidatologado.getId_candidato());
+//				
 				return "principal.xhtml?faces-redirect=true";
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-
-			FacesMessage msg = new FacesMessage("Erro ao efetuar login",e.getMessage());
-				
-			FacesContext.getCurrentInstance().addMessage(null, msg);			
-					
-			session.setAttribute("idusulogado", 0);
-			
-			return null;
-		}		
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//
+//			FacesMessage msg = new FacesMessage("Erro ao efetuar login",e.getMessage());
+//				
+//			FacesContext.getCurrentInstance().addMessage(null, msg);			
+//					
+//			session.setAttribute("idusulogado", 0);
+//			
+//			return null;
+//		}		
 	}
 	
 	/**

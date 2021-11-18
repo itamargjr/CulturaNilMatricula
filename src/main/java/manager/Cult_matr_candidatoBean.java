@@ -1,5 +1,8 @@
 package manager;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,18 +10,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 import entity.Cult_matr_candidato;
 import entity.Cult_segmento;
 import entity.Edu_matr_responsavel;
 import entity.End_endereco;
+import net.sf.jasperreports.engine.JasperRunManager;
 import persistence.Cult_matr_candidatoDao;
 import persistence.Cult_segmentoDao;
-import persistence.Edu_escolaDao;
-import persistence.Edu_matr_candidatoReportDao;
-import persistence.Edu_matr_responsavelDao;
+import persistence.Edu_matr_responsavelDao; 
 import persistence.End_enderecoDao;
+import report.DSReportCandidato;
 import util.Biblioteca;
+import util.SendMail;
 
 @ManagedBean
 @ViewScoped
@@ -232,7 +237,7 @@ public class Cult_matr_candidatoBean {
 				
 				ed.gravar(endereco);
 							
-//				enviaremailcandidato(idcandidato);
+				enviaremailcandidato(idcandidato);
 				
 				if (idcandidato == 0) {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Houve um erro na gravação do candidato", "")); // passa a mensagem
@@ -271,10 +276,164 @@ public class Cult_matr_candidatoBean {
 	}
 	
 	public void imprimirInscricao(){
-		
+		imprimeCandidato(candidato.getId_candidato());
 	}
 	
 	public void reenviarInscricao() {
+		try {
+			enviaremailcandidato(candidato.getId_candidato());
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email enviado com sucesso", ""));
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
+		}
+	}
+	
+	public void cancelarInscricao() {
+		try {
+			Cult_matr_candidatoDao cd = new Cult_matr_candidatoDao();
+			
+			cd.cancelaInscricao(candidato);
+			
+			candidato = new Cult_matr_candidato();
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Inscrição cancelada!", "")); 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "")); 
+		}
+	}
+	
+
+	
+	public void enviaremailcandidato(Integer IdCandidato){
 		
+		if ((IdCandidato==null)||(IdCandidato==0)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum candidato encontrado para enviar email", "")); // passa a mensagem
+		} else {
+			FacesContext fc = FacesContext.getCurrentInstance();
+			
+			try{		
+				
+				List<Cult_matr_candidato> lista = new Cult_matr_candidatoDao().findCandidato(IdCandidato);
+				
+				candidato = lista.get(0);
+
+				DSReportCandidato ds = new DSReportCandidato(lista);
+				
+				InputStream arquivo = FacesContext.getCurrentInstance()
+					.getExternalContext().getResourceAsStream("/candidatoCultura.jasper");	
+
+				byte[] pdf = JasperRunManager.runReportToPdf(arquivo, null, ds);
+					
+				String dest = candidato.getEmail_candidato();
+				
+				SendMail sm = new SendMail();
+				
+				String dadosemailhtml = "<br /> <strong>SECRETARIA DE CULTURA NILÓPOLIS 2022 - INSCRIÇÃO CANDIDATO <label>" +
+		           		 "</label> </strong><br /> <br />" +
+		           		 "<br /> Esta é uma confirmação da sua CANDIDATURA aos Segmentos na Secretaria de Cultura do município de Nilópolis <br />" +
+		           		 "<hr />" +
+		           		 "<br /><br />Candidato         : " + candidato.getNome_candidato() +
+		           		 "<br /><br />Data de Nascimento: " + candidato.getNascimento_candidato() +
+		           		 "<br /><br />Bairro            : " + candidato.getBairro_candidato() +
+		           		 "<br /><br />" + 
+		           		 "<br /><br />Responsável       : " + candidato.getNome_responsavel() +
+		           		 "<br /><br />" + 		           		 
+		           		 "<br /><br />Opções de Escola  : " + 
+		           		 "<br /><br />" + 
+		           		 "<br /><br />1ª Opção          : " + candidato.getDescricao_segmento1() +		           		 		           		
+		           		 "<br /><br />2ª Opção          : " + candidato.getDescricao_segmento2() +
+		           		 "<br /><br />3ª Opção          : " + candidato.getDescricao_segmento3() +
+		           		 "<br /><br />4ª Opção          : " + candidato.getDescricao_segmento4() +
+		           		 "<br /><br />5ª Opção          : " + candidato.getDescricao_segmento5() +
+		           		 "<br /><br />" + 
+		           		 "Você realizou a inscrição para concorrer a vagas na " +
+		           		 "<br />" +
+		           		 "Secretaria de Cultura do Município de Nilópolis em 2022. O resultado final  (Classificação) estará " +
+		           		 "<br />" +
+		           		 "disponível no mesmo endereço eletrônico." +
+		           		 "<br />" +
+		           		 "(www.nilopolisdigital.com/matriculasonline)"+
+		           		 "<div style='border:none;border-bottom:solid windowtext 1.0pt;padding:0cm 0cm 1.0pt 0cm'>" +
+		           		 
+		           		 "<table align='center'><tr>"+
+		           		 "<td align='center'><img src='http://nilopolisdigital.com/imagens/cultura.jpg' alt='Matrículas On Line 2022' /><br /><br />"+
+		           		 "<strong>Sistema de Matrículas On Line 2022 - Prefeitura Municipal de Nilópolis</strong>"+
+		           		 "</td></tr></table>";
+	
+				String[] to = {dest, "itamar.gjr@gmail.com"}; 
+				
+				//System.out.println("para: " + to);
+							
+				sm.sendMailAttachment("inscricaoeducacaonilopolis@gmail.com", to, "Matrícula Nilópolis 2022 - Candidato", dadosemailhtml, pdf);
+
+				//fc.addMessage("enviaremailprepedidos", new FacesMessage("Email enviado com sucesso! "));	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+				fc.addMessage("enviaremailprepedidos", new FacesMessage("Erro ao enviar: " + e.getMessage()));	
+			}
+		}
+	}
+	
+	public String imprimeCandidato(Integer IdCandidato){
+		
+		if ((IdCandidato==null)||(IdCandidato==0)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum candidato encontrado para enviar email", "")); // passa a mensagem
+		} else {
+			FacesContext fc = FacesContext.getCurrentInstance();
+			
+			try{		
+				
+				List<Cult_matr_candidato> lista = new Cult_matr_candidatoDao().findCandidato(IdCandidato);
+				
+				candidato = lista.get(0);
+
+				DSReportCandidato ds = new DSReportCandidato(lista);
+				
+				InputStream arquivo = FacesContext.getCurrentInstance()
+					.getExternalContext().getResourceAsStream("/candidatoCultura.jasper");	
+
+				byte[] pdf = JasperRunManager.runReportToPdf(arquivo, null, ds);
+					
+				HttpServletResponse res = (HttpServletResponse) FacesContext
+						.getCurrentInstance().getExternalContext().getResponse();
+					
+				res.setContentType("application/pdf");
+				
+				res.setContentLength(pdf.length);
+					
+				OutputStream out = res.getOutputStream();
+
+				out.write(pdf, 0, pdf.length);
+
+				out.flush();	
+				
+				out.close();
+				
+				FacesContext.getCurrentInstance().responseComplete();
+				
+				OutputStream fileout = new FileOutputStream("relatoriopreped.pdf");	
+				
+				fileout.write(pdf, 0, pdf.length);
+
+				fileout.flush();	
+
+				fileout.close();	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+				fc.addMessage("enviaremailprepedidos", new FacesMessage("Erro ao enviar: " + e.getMessage()));	
+			}
+		}
+		
+		return null;
 	}
 }

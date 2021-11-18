@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
-import entity.Edu_matr_candidatoReport;
+import entity.Cult_matr_candidato;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
 
 public class DSReportCandidato implements JRDataSource {
 	
-	private Iterator<Edu_matr_candidatoReport> dados;
+	private Iterator<Cult_matr_candidato> dados;
 	
-	private Edu_matr_candidatoReport registro;
+	private Cult_matr_candidato registro;
 	
-	public DSReportCandidato(List<Edu_matr_candidatoReport> lista) {
+	public DSReportCandidato(List<Cult_matr_candidato> lista) {
 		dados = lista.iterator();
 	}
 	
@@ -44,18 +44,6 @@ public class DSReportCandidato implements JRDataSource {
 			return registro.getNascimento_candidato();
 		}
 		
-		if(field.getName().equalsIgnoreCase("alunodarede_candidato")){
-			return registro.getAlunodarede_candidato();
-		}
-		
-		if(field.getName().equalsIgnoreCase("matricularede_candidato")){
-			return registro.getMatricularede_candidato();
-		}
-		
-		if(field.getName().equalsIgnoreCase("redeorigem_candidato")){
-			return registro.getRedeorigem_candidato();
-		}
-		
 		if(field.getName().equalsIgnoreCase("estciv_candidato")){
 			return registro.getEstciv_candidato();
 		}
@@ -82,34 +70,6 @@ public class DSReportCandidato implements JRDataSource {
 		
 		if(field.getName().equalsIgnoreCase("bairro_candidato")){
 			return registro.getBairro_candidato();
-		}
-		
-		if(field.getName().equalsIgnoreCase("irmaonaescola_candidato")){
-			return registro.getIrmaonaescola_candidato();
-		}
-		
-		if(field.getName().equalsIgnoreCase("nomeirmao_candidato")){
-			return registro.getNomeirmao_candidato();
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_escola")){
-			return new BigDecimal(registro.getId_escola());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_modensinovagas1")){
-			return new BigDecimal(registro.getId_modensinovagas1());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_modensinovagas2")){
-			return new BigDecimal(registro.getId_modensinovagas2());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_modensinovagas3")){
-			return new BigDecimal(registro.getId_modensinovagas3());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_modensinovagas")){
-			return new BigDecimal(registro.getId_modensinovagas());
 		}
 		
 		if(field.getName().equalsIgnoreCase("ano_candidato")){
@@ -142,26 +102,6 @@ public class DSReportCandidato implements JRDataSource {
 		
 		if(field.getName().equalsIgnoreCase("emissoridt_responsavel")){
 			return registro.getEmissoridt_responsavel();
-		}
-		
-		if(field.getName().equalsIgnoreCase("nome_escola")){
-			return registro.getNome_escola();
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_escola1")){
-			return new BigDecimal(registro.getId_escola1());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_escola2")){
-			return new BigDecimal(registro.getId_escola2());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_escola3")){
-			return new BigDecimal(registro.getId_escola3());
-		}
-		
-		if(field.getName().equalsIgnoreCase("id_escolaselecionada")){
-			return new BigDecimal(registro.getId_escolaselecionada());
 		}
 		
 		if(field.getName().equalsIgnoreCase("tipo_endereco")){
@@ -200,30 +140,6 @@ public class DSReportCandidato implements JRDataSource {
 			return registro.getBairro_endereco();
 		}
 		
-		if(field.getName().equalsIgnoreCase("nome_escola1")){
-			return registro.getNome_escola1();
-		}
-		
-		if(field.getName().equalsIgnoreCase("nome_escola2")){
-			return registro.getNome_escola2();
-		}
-		
-		if(field.getName().equalsIgnoreCase("nome_escola3")){
-			return registro.getNome_escola3();
-		}
-		
-		if(field.getName().equalsIgnoreCase("nome_escolaselecionada")){
-			return registro.getNome_escolaselecionada();
-		}
-		
-		if(field.getName().equalsIgnoreCase("descricao_modensino")){
-			return registro.getDescricao_modensino();
-		}
-		
-		if(field.getName().equalsIgnoreCase("descricao_modensinoanos")){
-			return registro.getDescricao_modensinoanos();
-		}
-		
 		if(field.getName().equalsIgnoreCase("tipo_candidato")){
 			return registro.getTipo_candidato();
 		}
@@ -238,6 +154,75 @@ public class DSReportCandidato implements JRDataSource {
 		
 		if(field.getName().equalsIgnoreCase("descricao_cid10")){
 			return registro.getDescricao_cid10();
+		}
+		
+		if(field.getName().equalsIgnoreCase("id_segmento1")){
+			return new BigDecimal(registro.getId_segmento1());
+		} 
+		if(field.getName().equalsIgnoreCase("id_segmento2")){
+			return new BigDecimal(registro.getId_segmento2());
+		} 
+		if(field.getName().equalsIgnoreCase("id_segmento3")){
+			return new BigDecimal(registro.getId_segmento3());
+		}
+		if(field.getName().equalsIgnoreCase("id_segmento4")){
+			return new BigDecimal(registro.getId_segmento4());
+		} 
+		if(field.getName().equalsIgnoreCase("id_segmento5")){
+			return new BigDecimal(registro.getId_segmento5());
+		} 
+		if(field.getName().equalsIgnoreCase("id_segmento")){
+			return new BigDecimal(registro.getId_segmento());
+		}  
+		
+		if(field.getName().equalsIgnoreCase("descricao_segmento1")){
+			return registro.getDescricao_segmento1();
+		}
+		if(field.getName().equalsIgnoreCase("dia_segmento1")){
+			return registro.getDia_segmento1();
+		}	
+		if(field.getName().equalsIgnoreCase("turno_segmento1")){
+			return registro.getTurno_segmento1();
+		}	
+		
+		if(field.getName().equalsIgnoreCase("descricao_segmento2")){
+			return registro.getDescricao_segmento2();
+		}
+		if(field.getName().equalsIgnoreCase("dia_segmento2")){
+			return registro.getDia_segmento2();
+		}	
+		if(field.getName().equalsIgnoreCase("turno_segmento2")){
+			return registro.getTurno_segmento2();
+		}	
+		
+		if(field.getName().equalsIgnoreCase("descricao_segmento3")){
+			return registro.getDescricao_segmento3();
+		}
+		if(field.getName().equalsIgnoreCase("dia_segmento3")){
+			return registro.getDia_segmento3();
+		}
+		if(field.getName().equalsIgnoreCase("turno_segmento3")){
+			return registro.getTurno_segmento3();
+		}	
+		
+		if(field.getName().equalsIgnoreCase("descricao_segmento4")){
+			return registro.getDescricao_segmento4();
+		}
+		if(field.getName().equalsIgnoreCase("dia_segmento4")){
+			return registro.getDia_segmento4();
+		}	
+		if(field.getName().equalsIgnoreCase("turno_segmento4")){
+			return registro.getTurno_segmento4();
+		}	
+		
+		if(field.getName().equalsIgnoreCase("descricao_segmento5")){
+			return registro.getDescricao_segmento5();
+		}
+		if(field.getName().equalsIgnoreCase("dia_segmento5")){
+			return registro.getDia_segmento5();
+		}	
+		if(field.getName().equalsIgnoreCase("turno_segmento5")){
+			return registro.getTurno_segmento5();
 		}
 		
 		return null;
