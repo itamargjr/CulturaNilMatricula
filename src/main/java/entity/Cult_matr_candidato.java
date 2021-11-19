@@ -69,6 +69,8 @@ public class Cult_matr_candidato {
 	private String turno_segmento5;
 	
 	private String cpf_candidato;
+	
+	private String datainscricao_candidato;
 
 	public Cult_matr_candidato() {
 		super();
@@ -88,7 +90,7 @@ public class Cult_matr_candidato {
 			String turno_segmento1, String descricao_segmento2, String dia_segmento2, String turno_segmento2,
 			String descricao_segmento3, String dia_segmento3, String turno_segmento3, String descricao_segmento4,
 			String dia_segmento4, String turno_segmento4, String descricao_segmento5, String dia_segmento5,
-			String turno_segmento5, String cpf_candidato) {
+			String turno_segmento5, String cpf_candidato, String datainscricao_candidato) {
 		super();
 		this.id_candidato = id_candidato;
 		this.id_responsavel = id_responsavel;
@@ -146,6 +148,15 @@ public class Cult_matr_candidato {
 		this.dia_segmento5 = dia_segmento5;
 		this.turno_segmento5 = turno_segmento5;
 		this.cpf_candidato = cpf_candidato;
+		this.datainscricao_candidato = datainscricao_candidato;
+	}
+
+	public String getDatainscricao_candidato() {
+		return datainscricao_candidato;
+	}
+
+	public void setDatainscricao_candidato(String datainscricao_candidato) {
+		this.datainscricao_candidato = datainscricao_candidato;
 	}
 
 	public String getCpf_candidato() {
@@ -622,6 +633,6 @@ public class Cult_matr_candidato {
 				+ ", turno_segmento3=" + turno_segmento3 + ", descricao_segmento4=" + descricao_segmento4
 				+ ", dia_segmento4=" + dia_segmento4 + ", turno_segmento4=" + turno_segmento4 + ", descricao_segmento5="
 				+ descricao_segmento5 + ", dia_segmento5=" + dia_segmento5 + ", turno_segmento5=" + turno_segmento5
-				+ ", cpf_candidato=" + cpf_candidato + "]";
+				+ ", cpf_candidato=" + cpf_candidato + ", datainscricao_candidato=" + datainscricao_candidato + "]";
 	}
 }

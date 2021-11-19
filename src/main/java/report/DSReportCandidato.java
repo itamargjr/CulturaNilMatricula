@@ -226,6 +226,9 @@ public class DSReportCandidato implements JRDataSource {
 		}	
 		if(field.getName().equalsIgnoreCase("cpf_candidato")){
 			return registro.getCpf_candidato();
+		}	
+		if(field.getName().equalsIgnoreCase("datainscricao_candidato")){
+			return registro.getDatainscricao_candidato();
 		}
 		
 		return null;

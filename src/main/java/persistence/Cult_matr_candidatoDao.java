@@ -55,8 +55,8 @@ public class Cult_matr_candidatoDao extends Dao {
 	                  "estciv_candidato, sexo_candidato, nacionalidade_candidato, email_candidato, " +
 	                  "celular_candidato, fixo_candidato, bairro_candidato, " + 
 	                  "id_segmento1, id_segmento2, id_segmento3, id_segmento4, id_segmento5, " +
-	                  "id_segmento, ano_candidato, id_candidato, tipo_candidato, necespec_candidato, cid_candidato, cpf_candidato) " +
-		              "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";	
+	                  "id_segmento, ano_candidato, id_candidato, tipo_candidato, necespec_candidato, cid_candidato, cpf_candidato, datainscricao_candidato) " +
+		              "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DATE_FORMAT(sysdate(),'%d/%m/%Y'))";	
 	
 		
 	
@@ -141,7 +141,7 @@ public class Cult_matr_candidatoDao extends Dao {
 						   "a.id_responsavel, a.nome_candidato, a.mae_candidato, " +
 						   "a.pai_candidato, a.nascimento_candidato, a.cpf_candidato, " +
 						   "a.estciv_candidato, a.sexo_candidato, a.nacionalidade_candidato, a.email_candidato, " +
-						   "a.celular_candidato, a.fixo_candidato, a.bairro_candidato, " + 
+						   "a.celular_candidato, a.fixo_candidato, a.bairro_candidato, a.datainscricao_candidato, " + 
 						   "a.id_segmento1, a.id_segmento2, a.id_segmento3, a.id_segmento4, a.id_segmento5, " +
 						   "a.id_segmento, a.ano_candidato, a.id_candidato, a.tipo_candidato, a.necespec_candidato, a.cid_candidato, " +
 						   "g.nome_responsavel, g.tipo_responsavel, g.cpf_responsavel,  " +
@@ -294,7 +294,8 @@ public class Cult_matr_candidatoDao extends Dao {
 					
 					rs.getString("descricao_segmento5"),
 					rs.getString("dia_segmento5"), turno5,
-					rs.getString("cpf_candidato"));
+					rs.getString("cpf_candidato"),
+					rs.getString("datainscricao_candidato"));
 
 		}						  
 		
@@ -314,7 +315,7 @@ public class Cult_matr_candidatoDao extends Dao {
 						   "a.id_responsavel, a.nome_candidato, a.mae_candidato, " +
 						   "a.pai_candidato, a.nascimento_candidato, a.cpf_candidato, " +
 						   "a.estciv_candidato, a.sexo_candidato, a.nacionalidade_candidato, a.email_candidato, " +
-						   "a.celular_candidato, a.fixo_candidato, a.bairro_candidato, " + 
+						   "a.celular_candidato, a.fixo_candidato, a.bairro_candidato, a.datainscricao_candidato, " + 
 						   "a.id_segmento1, a.id_segmento2, a.id_segmento3, a.id_segmento4, a.id_segmento5, " +
 						   "a.id_segmento, a.ano_candidato, a.id_candidato, a.tipo_candidato, a.necespec_candidato, a.cid_candidato, " +
 						   "g.nome_responsavel, g.tipo_responsavel, g.cpf_responsavel,  " +
@@ -466,7 +467,8 @@ public class Cult_matr_candidatoDao extends Dao {
 					
 					rs.getString("descricao_segmento5"),
 					rs.getString("dia_segmento5"), turno5,
-					rs.getString("cpf_candidato"));
+					rs.getString("cpf_candidato"),
+					rs.getString("datainscricao_candidato"));
 			
 			lista.add(c);
 
