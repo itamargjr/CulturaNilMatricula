@@ -224,7 +224,7 @@ public class Cult_matr_candidatoBean {
 				
 				candidato.setId_responsavel(idresp);	
 				
-				System.out.println("candidato: " + candidato);
+				//System.out.println("candidato: " + candidato);
 				
 				Integer idcandidato = cd.gravar(candidato);
 				
@@ -323,7 +323,7 @@ public class Cult_matr_candidatoBean {
 				
 				candidato = lista.get(0);
 				
-				System.out.println("candidato: " +candidato);
+				//System.out.println("candidato: " +candidato);
 
 				DSReportCandidato ds = new DSReportCandidato(lista);
 				
@@ -334,7 +334,7 @@ public class Cult_matr_candidatoBean {
 					
 				String dest = "";
 				
-				if (candidato.getEmail_candidato()!=null) {
+				if ((candidato.getEmail_candidato()!=null)&&(!candidato.getEmail_candidato().equalsIgnoreCase(""))) {
 					dest = candidato.getEmail_candidato();
 				} else if (candidato.getEmail_responsavel()!=null) {
 					dest = candidato.getEmail_responsavel();

@@ -346,7 +346,7 @@ public class Cult_matr_candidatoDao extends Dao {
 		
 		stmt = con.prepareStatement(statement);
 		
-		System.out.println(statement);
+		//System.out.println(statement);
 		
 		rs = stmt.executeQuery();
 		
