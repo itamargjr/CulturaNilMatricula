@@ -69,16 +69,6 @@
 							</p:selectOneMenu>
 						</div>
 						<div class="ObjetosColuna">
-							<p:outputLabel value="Estado Civil" />
-							<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.estciv_candidato}" styleClass="TamanhoSelectMIN" required="true" requiredMessage="por favor informe o estado civil">
-								<f:selectItem itemValue="" itemLabel="" />
-								<f:selectItem itemValue="S" itemLabel="Solteiro" />
-								<f:selectItem itemValue="C" itemLabel="Casado" /> 
-								<f:selectItem itemValue="V" itemLabel="Viúvo" />
-								<f:selectItem itemValue="D" itemLabel="Divorciado/Separado" />								
-							</p:selectOneMenu>
-						</div>
-						<div class="ObjetosColuna">
 							<p:outputLabel value="Nacionalidade" />
 							<p:selectOneMenu value="#{cult_matr_candidatoBean.candidato.nacionalidade_candidato}" styleClass="TamanhoSelectMIN" required="true" requiredMessage="por favor informe a nacionalidade">
 								<f:selectItem itemValue="" itemLabel="" />
@@ -206,13 +196,16 @@
 	      	
 	      		<p:panel header="Opção Selecionada">
 				    <p:dataTable id="tabelavagas" var="segmento" value="#{cult_matr_candidatoBean.segmentolista}" 
-				    											selection="#{cult_matr_candidatoBean.segmentoselecionadolista}" rowKey="#{segmento.id_segmento}" style="margin-bottom:0">
+				    											selection="#{cult_matr_candidatoBean.segmento}" rowKey="#{segmento.id_segmento}" style="margin-bottom:0">
 				        <f:facet name="header">
 				            Clique nas opções desejadas
 				        </f:facet>
-				        <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-				        <p:column headerText="Id">
-				            <h:outputText value="#{segmento.id_segmento}" />
+				        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+				        <p:column headerText="Idade" rendered="#{segmento.idademax_segmento ne 200}">
+				            <h:outputText value="de #{segmento.idademin_segmento} a #{segmento.idademax_segmento} anos" />
+				        </p:column>
+				        <p:column headerText="Idade" rendered="#{segmento.idademax_segmento eq 200}">
+				            <h:outputText value="a partir de #{segmento.idademin_segmento} anos" />
 				        </p:column>
 				        <p:column headerText="Segmento">
 				            <h:outputText value="#{segmento.descricao_segmento}" />
@@ -220,8 +213,10 @@
 				        <p:column headerText="Dias">
 				            <h:outputText value="#{segmento.dia_segmento}" />
 				        </p:column>
-				        <p:column headerText="turno">
-				            <h:outputText value="#{segmento.turno_segmento}" />
+				        <p:column headerText="turno" >
+				            <h:outputText value="MANHÃ" rendered="#{segmento.turno_segmento eq 'M'}"/>
+				            <h:outputText value="TARDE" rendered="#{segmento.turno_segmento eq 'T'}"/>
+				            <h:outputText value="NOITE" rendered="#{segmento.turno_segmento eq 'N'}"/>
 				        </p:column>
 				        <f:facet name="footer">
 				            <p:commandButton process="tabelavagas" update=":formescolha:painelsegmentosescolhidos" icon="pi pi-search" value="Ver Seleção" oncomplete="PF('dialogo').show()" />

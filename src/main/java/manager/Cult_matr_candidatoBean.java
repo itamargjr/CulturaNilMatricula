@@ -160,7 +160,6 @@ public class Cult_matr_candidatoBean {
 		} else {
 			
 			try {
-				
 				segmento.setIdadebusca(idade);
 				
 				segmentolista = new Cult_segmentoDao().findAll(segmento);
@@ -192,25 +191,27 @@ public class Cult_matr_candidatoBean {
 			
 			if (Candidatojaexiste) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este candidato já possui inscrição", "")); // passa a mensagem
-			} else if (segmentoselecionadolista.size()==0) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alguma opção de escola deve ser escolhida", "")); // passa a mensagem
-			} else if (segmentoselecionadolista.size()>5) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor, selecione no máximo 5 (CINCO) opções de segmentos", "")); // passa a mensagem
+			} else if (segmento.getId_segmento()==null) {//(segmentoselecionadolista.size()==0) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alguma opção deve ser escolhida", "")); // passa a mensagem
+			//} else if (segmentoselecionadolista.size()>5) {
+			//	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor, selecione no máximo 5 (CINCO) opções de segmentos", "")); // passa a mensagem
 			} else {
 				
-				for (int i = 0; i < segmentoselecionadolista.size(); i++) {
-					if (i==0) {
-						candidato.setId_segmento1(segmentoselecionadolista.get(i).getId_segmento());
-					} else if (i==1) {
-						candidato.setId_segmento2(segmentoselecionadolista.get(i).getId_segmento());
-					} else if (i==2) {
-						candidato.setId_segmento3(segmentoselecionadolista.get(i).getId_segmento());
-					} else if (i==3) {
-						candidato.setId_segmento4(segmentoselecionadolista.get(i).getId_segmento());
-					} else  {
-						candidato.setId_segmento5(segmentoselecionadolista.get(i).getId_segmento());
-					} 								
-				}
+//				for (int i = 0; i < segmentoselecionadolista.size(); i++) {
+//					if (i==0) {
+//						candidato.setId_segmento1(segmentoselecionadolista.get(i).getId_segmento());
+//					} else if (i==1) {
+//						candidato.setId_segmento2(segmentoselecionadolista.get(i).getId_segmento());
+//					} else if (i==2) {
+//						candidato.setId_segmento3(segmentoselecionadolista.get(i).getId_segmento());
+//					} else if (i==3) {
+//						candidato.setId_segmento4(segmentoselecionadolista.get(i).getId_segmento());
+//					} else  {
+//						candidato.setId_segmento5(segmentoselecionadolista.get(i).getId_segmento());
+//					} 								
+//				}
+				
+				candidato.setId_segmento1(segmento.getId_segmento());
 				
 				if (necespec) {
 					candidato.setNecespec_candidato("S");
@@ -354,11 +355,9 @@ public class Cult_matr_candidatoBean {
 		           		 "<br /><br />" + 		           		 
 		           		 "<br /><br />Opções de Escola  : " + 
 		           		 "<br /><br />" + 
-		           		 "<br /><br />1ª Opção          : " + candidato.getDescricao_segmento1() +		           		 		           		
-		           		 "<br /><br />2ª Opção          : " + candidato.getDescricao_segmento2() +
-		           		 "<br /><br />3ª Opção          : " + candidato.getDescricao_segmento3() +
-		           		 "<br /><br />4ª Opção          : " + candidato.getDescricao_segmento4() +
-		           		 "<br /><br />5ª Opção          : " + candidato.getDescricao_segmento5() +
+		           		 "<br /><br />Opção Escolhida   : " + candidato.getDescricao_segmento1() +		           		 		           		
+		           		 "<br /><br />Dias              : " + candidato.getDia_segmento1() +
+		           		 "<br /><br />Turno             : " + candidato.getTurno_segmento1() +
 		           		 "<br /><br />" + 
 		           		 "Você realizou a inscrição para concorrer a vagas na " +
 		           		 "<br />" +

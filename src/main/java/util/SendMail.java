@@ -83,7 +83,7 @@ public class SendMail {
           
         //Cria um autenticador que sera usado a seguir  
         SimpleAuth auth = null;  
-        auth = new SimpleAuth ("inscricaoeducacaonilopolis@gmail.com","educacao2019");
+        auth = new SimpleAuth ("nilopoliscultura@gmail.com","cultura2021");
           
         //Session - objeto que ira realizar a conexão com o servidor  
         /*Como há necessidade de autenticação é criada uma autenticacao que 
@@ -128,7 +128,7 @@ public class SendMail {
              *  2 - seu nome de usuario do gmail 
              *  3 - sua senha do gmail 
              */  
-            tr.connect(mailSMTPServer, "estamparia@wernertecidos.com.br","eemi77");
+            tr.connect(mailSMTPServer, "nilopoliscultura@gmail.com","cultura2021");
             msg.saveChanges(); // don't forget this  
             //envio da mensagem  
             tr.sendMessage(msg, msg.getAllRecipients());  
@@ -228,7 +228,7 @@ public class SendMail {
              *  2 - seu nome de usuario do gmail 
              *  3 - sua senha do gmail 
              */  
-            tr.connect(mailSMTPServer, "inscricaoeducacaonilopolis@gmail.com","educacao2019");
+            tr.connect(mailSMTPServer, "nilopoliscultura@gmail.com","cultura2021");
             msg.saveChanges(); // don't forget this  
             //envio da mensagem  
             tr.sendMessage(msg, msg.getAllRecipients());  
@@ -244,8 +244,8 @@ public class SendMail {
     public void enviarMail(String destinatario, String assunto,
 			String corpo) throws IOException {
 
-		String mailUsuario = "inscricaoeducacaonilopolis@gmail.com";
-		String mailSenha = "educacao2019";
+		String mailUsuario = "nilopoliscultura@gmail.com";
+		String mailSenha = "cultura2021";
 		String mailPortaSMTP = "587";
 		String mailHost = "smtp.gmail.com";
 		
@@ -272,7 +272,7 @@ public class SendMail {
 			System.out.println("assunto: " + assunto);
 			System.out.println("corpo: " + corpo);
 
-			Address from = new InternetAddress("inscricaoeducacaonilopolis@gmail.com");
+			Address from = new InternetAddress("nilopoliscultura@gmail.com");
 			Address to = new InternetAddress(destinatario);
 
 			message.setFrom(from);
