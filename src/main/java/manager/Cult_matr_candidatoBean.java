@@ -263,10 +263,20 @@ public class Cult_matr_candidatoBean {
 			
 			//System.out.println("Buscando candidato: " + candidatoreport);
 			
+			candidato.setAno_candidato(2022);
+			
 			candidato = new Cult_matr_candidatoDao().findCandidatoConsulta(candidato);
 			
 			if (candidato.getId_segmento1()==null) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Candidato não encontrado com os dados fornecidos", "")); // passa a mensagem
+			}
+			
+			if (candidato.getId_segmento()!=null) {
+				Cult_segmentoDao sd = new Cult_segmentoDao();
+				
+				segmento = sd.findSegmento(candidato.getId_segmento());
+			} else {
+				segmento = new Cult_segmento();
 			}
 			
 		} catch (Exception e) {

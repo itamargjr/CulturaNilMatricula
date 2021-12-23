@@ -56,6 +56,33 @@ public class Cult_segmentoDao extends Dao {
 		
 	}
 	
+	public Cult_segmento findSegmento(Integer Id) throws Exception{
+		
+		Cult_segmento segmento = new Cult_segmento();
+		
+		open();
+		
+		String statement = "select id_segmento, ano_segmento, descricao_segmento, " +
+						   "idademin_segmento, idademax_segmento, dia_segmento, " +
+						   "turno_segmento, vagas_segmento " +
+						   "from cult_segmento where id_segmento = " + Id;
+		
+		stmt = con.prepareStatement(statement);
+		
+		rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			segmento = new Cult_segmento(rs.getInt("id_segmento"), rs.getInt("ano_segmento"), rs.getString("descricao_segmento"),
+					                      rs.getInt("idademin_segmento"), rs.getInt("idademax_segmento"), rs.getString("dia_segmento"),
+					                      rs.getString("turno_segmento"), rs.getInt("vagas_segmento"));
+		}
+		
+		close();
+		
+		return segmento;
+		
+	}
+	
 	public List<String> retornaDescricaoSegmento(Integer ano) throws Exception{
 		List<String> lista = new ArrayList<String>();
 		
